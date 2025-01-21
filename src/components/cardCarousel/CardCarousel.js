@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Card from "../card/Card";
+import UpcommingProjects from "../../Assets/StaticData/UpcomingProjects";
+
 
 const CardCarousel = ({ heading, paragraph, cards }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -49,10 +51,10 @@ const CardCarousel = ({ heading, paragraph, cards }) => {
   }, [totalCards]);
 
   return (
-    <div className="my-16 md:px-16 px-4">
+    <div className="my-5 md:px-16 px-4">
       {/* Section Heading */}
       <div className="mb-4">
-        <h2 className="md:text-3xl text-xl font-bold text-gray-800">{heading}</h2>
+        <h2 className="md:text-3xl text-2xl font-bold text-gray-800">{heading}</h2>
         <p className="md:text-lg  text-gray-600 md:mt-4 mt-2">{paragraph}</p>
       </div>
 
@@ -81,7 +83,7 @@ const CardCarousel = ({ heading, paragraph, cards }) => {
           <div
             className={`flex gap-5 w-full ${isScroll ? "scroll-animation" : ""}`}
           >
-            {cards.concat(cards).map((card, index) => (
+            {UpcommingProjects.concat(cards).map((card, index) => (
               <Card key={index} card={card} />
             ))}
           </div>

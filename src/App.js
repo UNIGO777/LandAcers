@@ -10,6 +10,7 @@ import LoginPage from "./pages/loginPage/LoginPage";
 import './Assets/Global.css'
 
 import ROUTES_NAME from "./constants/routes";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path={ROUTES_NAME.CONTACT} element={<ContactPage />} />
           <Route path={ROUTES_NAME.LOGIN} element={<LoginPage />} />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </ThemeProvider>
   );

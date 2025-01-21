@@ -88,22 +88,22 @@ function Banner() {
     };
 
     return (
-      <div className='bg-balck'>
+      <div className='bg-balck md:mb-16'>
         <div
-            className={`relative min-h-[50vh] md:min-h-screen bg-cover bg-center flex items-center justify-center  transition-opacity duration-500 ${fade ? 'opacity-90' : 'opacity-100'}`}
+            className={`relative min-h-[80vh] md:min-h-screen bg-cover bg-center flex items-center justify-center  transition-opacity duration-500 ${fade ? 'opacity-90' : 'opacity-100'}`}
             style={{ backgroundImage: `url(${images[currentImageIndex]})` }} 
         >
             {/* Semi-transparent overlay */}
             <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
             <div className="relative z-10 text-center md:p-8 p-2 md:w-[80vw] lg:w-[60vw]">
-                <h1 className={`md:text-5xl mb-3 md:mb-6 text-xl font-bold text-white`}>
+                <h1 className={`md:text-5xl mb-3 md:mb-6 text-2xl font-bold text-white`}>
                     Discover Your Dream Land, Farmhouse, and Plots
                 </h1>
                 <p className='text-white text-sm md:text-lg mb-6'>
                     Explore the perfect spaces for your next investment or getaway. Whether you're looking for serene farmland, a cozy farmhouse, or prime plots, we have the ideal options waiting for you.
                 </p>
-                <div className="flex-col md:flex-row md:gap-4 hidden md:flex">
+                <div className="flex-col md:flex-row md:gap-4 flex">
                     <div className="relative ">
                         <InputField
                             type="text"
@@ -111,11 +111,11 @@ function Banner() {
                             name='State'
                             value={stateInput}
                             onChange={handleStateInputChange}
-                            InputClassName="inputImg rounded-full w-[13vw] text-white"
+                            InputClassName="inputImg rounded-full w-[63vw] md:w-[13vw] text-white"
                             bgImg
                         />
                         {filteredStates.length > 0 && (
-                            <ul className="absolute bg-white border border-gray-300 rounded-md mt-1 w-full max-h-40 overflow-y-auto z-20">
+                            <ul className="absolute bg-white border border-gray-300 left-[50%] -translate-x-1/2 rounded-md mt-1 w-[63vw] md:w-full max-h-40 overflow-y-auto z-20">
                                 {filteredStates.map((state, index) => (
                                     <li
                                         key={index}
@@ -135,12 +135,12 @@ function Banner() {
                             placeholder="City"
                             value={cityInput}
                             onChange={handleCityInputChange}
-                            InputClassName="inputImg rounded-full w-[13vw] text-white"
+                            InputClassName="inputImg rounded-full w-[63vw]  md:w-[13vw] text-white"
                             bgImg
                             disabled={isCityDisabled}
                         />
                         {filteredCities.length > 0 && (
-                            <ul className="absolute bg-white border border-gray-300 rounded-md mt-1 w-full max-h-40 overflow-y-auto z-20">
+                            <ul className="absolute bg-white border border-gray-300 left-[50%] -translate-x-1/2 rounded-md mt-1 w-[63vw] md:w-full max-h-40 overflow-y-auto z-20">
                                 {filteredCities.map((city, index) => (
                                     <li
                                         key={index}
@@ -153,12 +153,15 @@ function Banner() {
                             </ul>
                         )}
                     </div>
+                   
+                    <Select options={options} bgimg onChange={handleSelectChange} SelectClassName={`bg-gray-100 w-[63vw]  md:w-full text-white `} OptionClassName={`text-black`} value={undefined} />
                     
-                    <Select options={options} bgimg onChange={handleSelectChange} SelectClassName={`bg-gray-100 text-white `} OptionClassName={`text-black`} value={undefined} />
                 </div>
-                <Button onClick={() => {}} ButtonClassName={`bg-${theme}-primary w-full mt-5 rounded-xl hidden md:block`}>
+                <div className='w-full flex justify-center'>
+                <Button onClick={() => {}} ButtonClassName={`bg-${theme}-primary w-[63vw] md:w-full mt-5 rounded-xl block`}>
                     Search
                 </Button>
+                </div>
             </div>
         </div></div>
     )
