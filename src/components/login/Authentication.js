@@ -136,7 +136,7 @@ const SignUpForm = ({ toggleForm}) => {
         }));
     };
 
-    const handleSubmit = async̀(e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         // Validation checks
         if (!formData.fullName.trim()) {
