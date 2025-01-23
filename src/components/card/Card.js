@@ -10,9 +10,9 @@ const Card = ({ card }) => {
   };
 
   return (
-    <div  className="relative transition-transform duration-500 w-[100%] sm:w-[70%] md:w-[30%] overflow-hidden flex-shrink-0" >
+    <div  className="relative transition-transform duration-500 w-[100%]  overflow-hidden flex-shrink-0" >
                   <img src={card.image} loading='lazy' alt={card.title} className="h-[30vh] sm:h-[40vh]  md:h-[40vh] object-cover rounded-lg w-full" />
-                  <div className="absolute w-full bg-black md:h-[50%] bottom-0 bg-opacity-50 flex flex-col justify-center  text-white p-4">
+                  <div className="absolute rounded-b-md w-full bg-black md:h-[50%] bottom-0 bg-opacity-50 flex flex-col justify-center  text-white p-4">
                       <h3 className="text-xl font-semibold">{card.title}</h3>
                       <p className="text-lg">{card.location}</p>
                       <p className="text-lg font-bold">{card.details}</p>

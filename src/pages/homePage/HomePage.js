@@ -24,11 +24,12 @@ function HomePage() {
 
       <div className='flex flex-col md:flex-row w-full md:px-10 '>
         <SreenCarosel Title={"Upcomming Projects"} className={'md:w-1/2'} description="Explore our latest upcoming projects that offer modern living spaces and exceptional amenities." data={UpcomingProjectsData}/>
-        <SreenCarosel Title={"Our Best Projects"} className={'md:w-1/2'} description="Explore our Best projects that offer modern living spaces and exceptional amenities." data={UpcomingProjectsData}/>
+        
+        <SreenCarosel Title={"Our Best Projects"} className={'md:w-1/2'} description="Discover our premium portfolio of completed projects showcasing architectural excellence, luxurious amenities." data={UpcomingProjectsData}/>
       </div>
 
       <ServiceBaner  Title="Sell or Rent your property faster with LandsAcers" description="Sell Lands/Plots/FarmHouse property" SubTitle="Register to post your property" buttonDescription="Post Your property Now"  image="https://images.unsplash.com/photo-1713322957180-5a7d9ef6ebc6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-      
+      <br/>
       <Services/>
       
 

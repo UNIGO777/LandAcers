@@ -19,7 +19,7 @@ const ServiceBaner = ({ Title, SubTitle, description, link, image, buttonDescrip
                     </div>
                     <div className='text-left flex flex-col px-6  md:p-16  justify-center'>
                     <h2 className="text-2xl mb-6 font-bold ">{SubTitle}</h2>
-                    <p className="mb-2 font-semibold">{description}</p>
+                    <p className="mb-2 text-gray-500">{description}</p>
                     {buttonDescription && <a href={link}><button className="bg-blue-500 mt-4 text-white w-fit py-3 px-5 rounded">{buttonDescription}</button></a>}
                     </div>
                 </div>

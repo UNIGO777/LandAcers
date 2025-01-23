@@ -5,7 +5,7 @@ const ImageList = ({ heading, paragraph, images }) => {
     <div className="my-8 px-4  md:px-16">
       {/* Heading Section */}
       <div className="mb-6">
-        <h2 className="md:text-3xl text-xl font-bold text-gray-800">{heading}</h2>
+        <h2 className="text-4xl font-bold text-gray-800">{heading}</h2>
         <p className="md:text-lg text-gray-600 mt-2">{paragraph}</p>
       </div>
 

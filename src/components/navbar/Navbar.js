@@ -4,12 +4,23 @@ import ROUTES_NAME from "../../constants/routes";
 import { useTheme } from "../../context/ThemeContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+import Login from "../login/Authentication";
+
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme } = useTheme();
   const location = useLocation(); 
+  const [loginOpen, setLoginOpen] = useState(false);
+
+  const openLogin = () => {
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    setLoginOpen(true);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +47,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
         isHomePage
           ? scrolled
             ? `bg-${theme}-background shadow-md text-${theme}-primary`
@@ -96,12 +107,13 @@ const Navbar = () => {
           </ul>
 
           {/* Login Button */}
-          <Link
-            to={ROUTES_NAME.LOGIN}
+          <button
+            onClick={openLogin}
             className={`px-6 py-2 rounded-lg bg-${theme}-primary text-${theme}-background hover:bg-${theme}-secondary transition`}
           >
             Login
-          </Link>
+          </button>
+          
         </div>
 
         {/* Hamburger Menu */}
@@ -180,17 +192,22 @@ const Navbar = () => {
             </li>
             <li>
               {/* Login Button */}
-              <Link
-                to={ROUTES_NAME.LOGIN}
+              <button
+                onClick={() => {
+                  setNavOpen(false);
+                  openLogin();
+                }}
                 className={`px-4 py-2 rounded-lg bg-${theme}-primary text-${theme}-background hover:bg-${theme}-secondary transition`}
-                onClick={() => setNavOpen(false)}
               >
                 Login
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
       </div>
+     
+      <Login isOpen={loginOpen} setIsOpen={setLoginOpen} />
+    
     </nav>
   );
 };
