@@ -1,4 +1,4 @@
-import { FaEllipsisV } from "react-icons/fa"
+import { FaEllipsisV, FaEye, FaEdit, FaTrash } from "react-icons/fa"
 
 const properties = [
   {
@@ -37,76 +37,98 @@ const properties = [
 
 const RecentProperties = () => {
   return (
-    <div className="p-6 mt-6 bg-white shadow-sm rounded-xl">
-      <div className="flex items-center justify-between">
+    <div className="p-6 mt-6 bg-white shadow-lg rounded-xl">
+      <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-base font-semibold">Recent Properties</h3>
+          <h3 className="text-lg font-semibold text-gray-900">Recent Properties</h3>
           <p className="text-sm text-gray-500">
-            <span className="font-medium text-[#3B82F6]">12 new</span> properties this month
+            <span className="font-medium text-blue-600">12 new</span> properties this month
           </p>
         </div>
-        <button className="p-2 rounded hover:bg-gray-100">
+        <button className="p-2 transition-colors duration-200 rounded hover:bg-gray-100">
           <FaEllipsisV className="w-5 h-5 text-gray-500" />
         </button>
       </div>
 
-      <div className="mt-6 overflow-x-auto">
+      <div className="overflow-x-auto">
         <table className="w-full min-w-[640px] table-auto">
           <thead>
-            <tr>
-              <th className="px-4 py-3 text-xs font-medium text-left text-gray-400 border-b border-gray-200">
-                PROPERTY
+            <tr className="bg-gray-50">
+              <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
+                Property
               </th>
-              <th className="px-4 py-3 text-xs font-medium text-left text-gray-400 border-b border-gray-200">
-                LOCATION
+              <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
+                Location
               </th>
-              <th className="px-4 py-3 text-xs font-medium text-left text-gray-400 border-b border-gray-200">PRICE</th>
-              <th className="px-4 py-3 text-xs font-medium text-left text-gray-400 border-b border-gray-200">STATUS</th>
-              <th className="px-4 py-3 text-xs font-medium text-left text-gray-400 border-b border-gray-200">
-                COMPLETION
+              <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
+                Price
+              </th>
+              <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
+                Status
+              </th>
+              <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
+                Completion
+              </th>
+              <th className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
+                Actions
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white divide-y divide-gray-200">
             {properties.map((property, index) => (
-              <tr key={index}>
-                <td className="px-4 py-3">
+              <tr key={index} className="transition-colors duration-200 hover:bg-gray-50">
+                <td className="px-4 py-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gray-100 rounded-lg"></div>
-                    <p className="text-sm font-semibold">{property.name}</p>
+                    <div className="flex items-center justify-center w-12 h-12 font-bold text-gray-500 bg-gray-200 rounded-lg">
+                      {property.name[0]}
+                    </div>
+                    <p className="text-sm font-medium text-gray-900">{property.name}</p>
                   </div>
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-4">
                   <p className="text-sm text-gray-600">{property.location}</p>
                 </td>
-                <td className="px-4 py-3">
-                  <p className="text-sm font-medium">{property.price}</p>
+                <td className="px-4 py-4">
+                  <p className="text-sm font-medium text-gray-900">{property.price}</p>
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-4">
                   <span
                     className={`inline-flex rounded-full px-2 py-1 text-xs font-medium
                     ${
                       property.status === "For Sale"
-                        ? "bg-green-100 text-green-700"
+                        ? "bg-green-100 text-green-800"
                         : property.status === "For Rent"
-                          ? "bg-blue-100 text-blue-700"
-                          : "bg-yellow-100 text-yellow-700"
+                          ? "bg-blue-100 text-blue-800"
+                          : "bg-yellow-100 text-yellow-800"
                     }`}
                   >
                     {property.status}
                   </span>
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-4">
                   <div>
                     <div className="flex items-center gap-2">
-                      <p className="text-sm font-medium">{property.completion}%</p>
+                      <p className="text-sm font-medium text-gray-900">{property.completion}%</p>
                     </div>
-                    <div className="w-full h-1 mt-2 bg-gray-200 rounded-full">
+                    <div className="w-full h-2 mt-1 bg-gray-200 rounded-full">
                       <div
-                        className="h-full rounded-full bg-[#3B82F6]"
+                        className="h-full bg-blue-600 rounded-full"
                         style={{ width: `${property.completion}%` }}
                       ></div>
                     </div>
+                  </div>
+                </td>
+                <td className="px-4 py-4">
+                  <div className="flex items-center gap-2">
+                    <button className="text-gray-400 transition-colors duration-200 hover:text-blue-600">
+                      <FaEye className="w-4 h-4" />
+                    </button>
+                    <button className="text-gray-400 transition-colors duration-200 hover:text-green-600">
+                      <FaEdit className="w-4 h-4" />
+                    </button>
+                    <button className="text-gray-400 transition-colors duration-200 hover:text-red-600">
+                      <FaTrash className="w-4 h-4" />
+                    </button>
                   </div>
                 </td>
               </tr>

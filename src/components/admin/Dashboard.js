@@ -7,8 +7,10 @@ const Dashboard = () => {
     <Layout>
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Dashboard</h2>
-          <p className="text-gray-500">Welcome to your property management dashboard</p>
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h2>
+          <p className="mt-2 text-sm text-gray-600">
+            Welcome to your property management dashboard. Here's an overview of your recent activity.
+          </p>
         </div>
         <MetricCards />
         <RecentProperties />
