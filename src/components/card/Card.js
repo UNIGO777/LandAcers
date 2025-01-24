@@ -1,6 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const Card = ({ card }) => {
+
+  const Navigate = useNavigate()
   const renderRating = (rating) => {
     let stars = [];
     for (let i = 0; i < 5; i++) {
@@ -11,17 +15,17 @@ const Card = ({ card }) => {
 
   return (
     <div  className="relative transition-transform duration-500 w-[100%]  overflow-hidden flex-shrink-0" >
-                  <img src={card.image} loading='lazy' alt={card.title} className="h-[30vh] sm:h-[40vh]  md:h-[40vh] object-cover rounded-lg w-full" />
+                  <img loding="lazy" src={card.image} loading='lazy' alt={card.title} className="h-[30vh] sm:h-[40vh]  md:h-[40vh] object-cover rounded-lg w-full" />
                   <div className="absolute rounded-b-md w-full bg-black md:h-[50%] bottom-0 bg-opacity-50 flex flex-col justify-center  text-white p-4">
                       <h3 className="text-xl font-semibold">{card.title}</h3>
                       <p className="text-lg">{card.location}</p>
                       <p className="text-lg font-bold">{card.details}</p>
                       {/* <p className="text-lg">{card.price}</p> */}
-                      <button className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-lg">View Details</button>
+                      <button className="mt-3 bg-blue-500 text-white px-4 py-2 rounded-lg" onClick={()=> Navigate(`/property/${card._id}`)}>View Details</button>
                   </div>
               </div>
     // <div className="md:w-[30%] w-[60%] md:h-80 bg-white shrink-0 rounded-lg shadow-lg cursor-pointer">
-    //   <img
+    //   <img loding="lazy"
     //     src={card.image}
     //     alt={card.title}
     //     className="w-full md:h-[70%] rounded-t-lg object-cover"

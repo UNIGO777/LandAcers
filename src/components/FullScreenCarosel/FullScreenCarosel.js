@@ -36,7 +36,7 @@ const FullScreenCarosel = ({Title,description,data,className}) => {
       <div className='overflow-hidden relative flex rounded-md'>
           {data?.map((project, index) => (
               <div key={index} className="relative transition-transform duration-500 w-full flex-shrink-0" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-                  <img src={project.image} loading='lazy' alt={project.title} className="h-[50vh] md:h-[80vh] object-cover rounded-lg w-full" />
+                  <img loding="lazy" src={project.image} loading='lazy' alt={project.title} className="h-[50vh] md:h-[80vh] object-cover rounded-lg w-full" />
                   <div className="absolute w-full bg-black md:h-1/3 bottom-0 bg-opacity-50 flex flex-col justify-center  text-white p-4">
                       <h3 className="text-xl font-semibold">{project.title}</h3>
                       <p className="text-lg">{project.location}</p>

@@ -11,7 +11,7 @@ const ServiceBaner = ({ Title, SubTitle, description, link, image, buttonDescrip
                 </div>
                 <div className={`flex flex-col  md:flex-row ${demantionChange && 'md:flex-row-reverse'}`}>
                     <div className=" h-[55vh]  md:h-[60vh]  min-w-full max-w-full md:min-w-[50vw] md:max-w-[50vw]  p-5">
-                        <img
+                        <img loding="lazy"
                             src={image}
                             alt="Living Room"
                             className="mx-auto rounded-lg shadow-lg w-full md:w-[50vw] h-[50vh]  md:h-[60vh] object-cover"

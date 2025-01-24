@@ -103,13 +103,13 @@ const LoginForm = ({ togleForm}) => {
                         <p className="text-gray-600 mb-4">or login with</p>
                         <div className="flex justify-center space-x-4">
                             <button type="button" className="p-2 rounded-full bg-gray-100">
-                                <img src="/facebook-icon.svg" alt="Facebook" className="w-6 h-6" />
+                                <img loding="lazy" src="/facebook-icon.svg" alt="Facebook" className="w-6 h-6" />
                             </button>
                             <button type="button" className="p-2 rounded-full bg-gray-100">
-                                <img src="/google-icon.svg" alt="Google" className="w-6 h-6" />
+                                <img loding="lazy" src="/google-icon.svg" alt="Google" className="w-6 h-6" />
                             </button>
                             <button type="button" className="p-2 rounded-full bg-gray-100">
-                                <img src="/linkedin-icon.svg" alt="LinkedIn" className="w-6 h-6" />
+                                <img loding="lazy" src="/linkedin-icon.svg" alt="LinkedIn" className="w-6 h-6" />
                             </button>
                         </div>
                     </div> */}

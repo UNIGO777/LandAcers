@@ -18,7 +18,7 @@ const ImageList = ({ heading, paragraph, images }) => {
             .map((image, index) => (
               <div key={index} className="relative">
                 {/* Image */}
-                <img
+                <img loding="lazy"
                   src={image.src}
                   alt={image.name}
                   className="w-full md:h-80 h-40 object-cover rounded-lg shadow-md"
@@ -34,7 +34,7 @@ const ImageList = ({ heading, paragraph, images }) => {
             .map((image, index) => (
               <div key={index} className="relative">
                 {/* Image */}
-                <img
+                <img loding="lazy"
                   src={image.src}
                   alt={image.name}
                   className="w-full md:h-80 h-40 object-cover rounded-lg shadow-md"
@@ -54,7 +54,7 @@ const ImageList = ({ heading, paragraph, images }) => {
             .map((image, index) => (
               <div key={index} className="relative">
                 {/* Image */}
-                <img
+                <img loding="lazy"
                   src={image.src}
                   alt={image.name}
                   className="w-full md:h-80 h-40 object-cover rounded-lg shadow-md"
@@ -70,7 +70,7 @@ const ImageList = ({ heading, paragraph, images }) => {
             .map((image, index) => (
               <div key={index} className="relative">
                 {/* Image */}
-                <img
+                <img loding="lazy"
                   src={image.src}
                   alt={image.name}
                   className="w-full md:h-80 h-40 object-cover rounded-lg shadow-md"

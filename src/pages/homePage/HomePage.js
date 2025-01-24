@@ -18,7 +18,10 @@ function HomePage() {
       <CardCarousel
         heading="Discover Our Featured Properties"
         paragraph="Browse through our curated selection of properties, each offering unique features and opportunities for your next investment or dream home."
-        cards={cardsData}
+        cards={cardsData.map(card => ({
+          ...card,
+          location: `${card.location.city}, ${card.location.district}, ${card.location.state}, ${card.location.pincode}`
+        }))}
         
       />
 
