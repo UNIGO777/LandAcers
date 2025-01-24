@@ -55,14 +55,14 @@ const Navbar = () => {
           : `bg-${theme}-background text-${theme}-text`
       }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
+      <div className="flex items-center justify-between px-4 py-3 mx-auto max-w-7xl md:py-4">
         {/* Logo */}
         <div className={`text-2xl font-bold ${isHomePage ? (scrolled ? `text-${theme}-primary` : "text-white") : `text-${theme}-text`}`}>
           <Link to={ROUTES_NAME.HOME}>LandsAcers</Link>
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="items-center hidden space-x-6 md:flex">
           <ul className={`flex space-x-6 font-medium`}>
             <li>
               <Link
@@ -127,7 +127,7 @@ const Navbar = () => {
         {/* Mobile Menu and Overlay */}
         {navOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-40"
+            className="fixed inset-0 z-40 bg-black bg-opacity-50"
             onClick={() => setNavOpen(false)}
           ></div>
         )}

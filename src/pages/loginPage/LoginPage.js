@@ -1,10 +1,10 @@
 import React from 'react'
 
-function LoginPage() {
+const LoginPage = () => {
   return (
-    <div className='h-screen w-full flex justify-center items-center text-3xl'>
-        LoginPage
-        </div>
+    <div>
+      Login
+    </div>
   )
 }
 
