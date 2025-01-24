@@ -26,9 +26,11 @@ export const cardsData = [
         gatedColonyStatus: false,
       },
       brokerDetails: {
+        profilePicture: "",
         name: 'Broker A',
         contact: 'brokerA@example.com',
-        phone: '123-456-7890'
+        phone: '123-456-7890',
+        properties: 1000
       },
       moreImages: [
         'https://example.com/image1.jpg',

@@ -7,6 +7,8 @@ import SreenCarosel from '../../components/FullScreenCarosel/FullScreenCarosel';
 import UpcomingProjectsData from '../../Assets/StaticData/UpcomingProjects';
 import ServiceBaner from '../../components/ServiceBaner/ServiceBaner';
 import Services from '../../Miner components/Services/Services';
+import Card from '../../components/card/Card';
+
 
 
 function HomePage() {
@@ -14,20 +16,21 @@ function HomePage() {
   return (
     <>
       <Banner />
-
-      <CardCarousel
-        heading="Discover Our Featured Properties"
-        paragraph="Browse through our curated selection of properties, each offering unique features and opportunities for your next investment or dream home."
-        cards={cardsData.map(card => ({
-          ...card,
-          location: `${card.location.city}, ${card.location.district}, ${card.location.state}, ${card.location.pincode}`
-        }))}
-        
-      />
+      <div className="mt-10 px-3 md:px-10 pb-5  md:pb-10 ">
+      <h2 className="text-xl md:text-2xl font-bold">Our Featured Properties</h2>
+      
+      <div className="mt-10  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 p-2 md:p-10">
+                   {
+                    Array.isArray(cardsData) && cardsData.slice(0,4).map((card, index) => {
+                        return <Card key={index} card={{image: card.image, title: card.title, price: card.plotDetails ? card.plotDetails.price : card.farmhouseDetails.price, location: `${card.location.locality}, ${card.location.city}`,_id: card._id }} />
+                    })
+                   }
+                </div>
+                </div>
 
       <div className='flex flex-col md:flex-row w-full md:px-10 '>
         <SreenCarosel Title={"Upcomming Projects"} className={'md:w-1/2'} description="Explore our latest upcoming projects that offer modern living spaces and exceptional amenities." data={UpcomingProjectsData}/>
-        
+        <br/>
         <SreenCarosel Title={"Our Best Projects"} className={'md:w-1/2'} description="Discover our premium portfolio of completed projects showcasing architectural excellence, luxurious amenities." data={UpcomingProjectsData}/>
       </div>
 

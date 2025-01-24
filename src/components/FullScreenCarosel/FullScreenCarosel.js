@@ -30,8 +30,8 @@ const FullScreenCarosel = ({Title,description,data,className}) => {
   
 
   return (
-    <div className={` my-8 px-4  ${className}`}>
-      <h2 className="text-2xl font-bold mb-4">{Title}</h2>
+    <div className={` my-4 md:my-8 px-4  ${className}`}>
+      <h2 className="text-xl md:text-2xl font-bold mb-4">{Title}</h2>
       <p className="text-gray-600 mb-6">{description}</p>
       <div className='overflow-hidden relative flex rounded-md'>
           {data?.map((project, index) => (

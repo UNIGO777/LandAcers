@@ -45,12 +45,15 @@ const CardCarousel = ({ heading, paragraph, cards }) => {
     );
   };
 
+  // Calculate slidesToShow based on the number of cards
+  const slidesToShow = Math.min(cards.length, 4); // Adjust to show up to 4 cards
+
   // Slider settings
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -60,14 +63,14 @@ const CardCarousel = ({ heading, paragraph, cards }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: Math.min(cards.length, 3),
           slidesToScroll: 1,
         }
       },
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: Math.min(cards.length, 2),
           slidesToScroll: 1
         }
       },
@@ -84,15 +87,17 @@ const CardCarousel = ({ heading, paragraph, cards }) => {
   return (
     <div className="my-5 md:px-16 px-4">
       <div className="mb-8">
-        <h2 className="md:text-3xl text-2xl font-bold text-gray-800">{heading}</h2>
-        <p className="md:text-lg text-gray-600 md:mt-4 mt-2">{paragraph}</p>
+        <h2 className="md:text-3xl text-md font-bold text-gray-800">{heading}</h2>
+        <p className="md:text-lg text-sm text-gray-600 md:mt-4 mt-2">{paragraph}</p>
       </div>
 
       <div>
-        <Slider ref={sliderRef} {...settings} className="gap-4">
+        <Slider ref={sliderRef} {...settings} className="flex">
           {cards.map((card, index) => (
-            <div key={index} className="p-3">
-              <Card card={card} />
+            <div key={index} className="flex justify-center" >
+              <div className="p-3 ml-20" style={{ width: '350px' }}>
+                <Card card={card} />
+              </div>
             </div>
           ))}
         </Slider>

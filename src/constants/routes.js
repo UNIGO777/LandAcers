@@ -8,7 +8,9 @@ const ROUTES_NAME = {
   POST_A_PROJECT: '/post-project',
   VIEW_PROPERTY: '/property/:id',
   VIEW_PROJECT: '/project/:id',
-  VIEW_BROKER: '/broker/:id'
+  VIEW_BROKER: '/broker/:id',
+  ADMIN : '/admin'
+
 };
 
 export default ROUTES_NAME;
