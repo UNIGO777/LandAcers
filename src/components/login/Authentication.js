@@ -42,16 +42,16 @@ const LoginForm = ({ togleForm}) => {
         }
     };
     return (
-        <div className="flex  min-h-full">
+        <div className="flex min-h-full">
             {/* Left Panel */}
-            <div className="w-1/2 p-12 hidden md:flex  bg-blue-500  text-white flex-col justify-center items-center text-center">
-                <h1 className="text-3xl font-bold mb-4 w-1/2">Welcome Back To LandAcers!</h1>
+            <div className="flex-col items-center justify-center hidden w-1/2 p-12 text-center text-white bg-blue-500 md:flex">
+                <h1 className="w-1/2 mb-4 text-3xl font-bold">Welcome Back To LandAcers!</h1>
                 <p className="mb-8">
                     We are so excited to have you here. Login to access 
                     exclusive offers, rewards, and discounts.
                 </p>
                 <button 
-                    className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-6 rounded-lg"
+                    className="px-6 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-600"
                     onClick={() => togleForm()}
                 >
                     Don't have an account? Sign up.
@@ -59,9 +59,9 @@ const LoginForm = ({ togleForm}) => {
             </div>
 
             {/* Right Panel - Login Form */}
-            <div className="md:w-1/2 p-12 flex flex-col justify-center">
-                <div className="md:hidden text-center mb-8">
-                    <h1 className="text-2xl font-bold mb-2">Welcome Back To LandAcers!</h1>
+            <div className="flex flex-col justify-center p-12 md:w-1/2">
+                <div className="mb-8 text-center md:hidden">
+                    <h1 className="mb-2 text-2xl font-bold">Welcome Back To LandAcers!</h1>
                     
                     
                 </div>
@@ -204,14 +204,14 @@ const SignUpForm = ({ toggleForm}) => {
     return (
         <div className="flex min-h-full">
             {/* Left Panel */}
-            <div className="w-1/2 p-12 hidden md:flex bg-blue-500 text-white flex-col justify-center items-center text-center">
-                <h1 className="text-3xl font-bold mb-4 w-1/2">Join LandAcers Today!</h1>
+            <div className="flex-col items-center justify-center hidden w-1/2 p-12 text-center text-white bg-blue-500 md:flex">
+                <h1 className="w-1/2 mb-4 text-3xl font-bold">Join LandAcers Today!</h1>
                 <p className="mb-8">
                     Create an account to unlock exclusive property listings,
                     save your favorites, and get personalized recommendations.
                 </p>
                 <button 
-                    className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-6 rounded-lg"
+                    className="px-6 py-2 text-white bg-blue-400 rounded-lg hover:bg-blue-600"
                     onClick={() => toggleForm()}
                 >
                     Already have an account? Login.
@@ -219,11 +219,11 @@ const SignUpForm = ({ toggleForm}) => {
             </div>
 
             {/* Right Panel - Signup Form */}
-            <div className="md:w-1/2 p-12 flex flex-col justify-center">
-                <div className="md:hidden text-center mb-8">
-                    <h1 className="text-2xl font-bold mb-2">Join LandAcers Today!</h1>
+            <div className="flex flex-col justify-center p-12 md:w-1/2">
+                <div className="mb-8 text-center md:hidden">
+                    <h1 className="mb-2 text-2xl font-bold">Join LandAcers Today!</h1>
                 </div>
-                <h2 className="text-2xl font-semibold mb-8">Sign Up</h2>
+                <h2 className="mb-8 text-2xl font-semibold">Sign Up</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <input
@@ -232,7 +232,7 @@ const SignUpForm = ({ toggleForm}) => {
                             value={formData.fullName}
                             onChange={handleChange}
                             placeholder="Full Name"
-                            className="w-full p-3 rounded-lg bg-gray-100"
+                            className="w-full p-3 bg-gray-100 rounded-lg"
                         />
                     </div>
                     <div>
@@ -242,7 +242,7 @@ const SignUpForm = ({ toggleForm}) => {
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="Email Address"
-                            className="w-full p-3 rounded-lg bg-gray-100"
+                            className="w-full p-3 bg-gray-100 rounded-lg"
                         />
                     </div>
                     <div>
@@ -269,7 +269,7 @@ const SignUpForm = ({ toggleForm}) => {
                                 }
                             }}
                             placeholder="Phone Number "
-                            className="w-full p-3 rounded-lg bg-gray-100"
+                            className="w-full p-3 bg-gray-100 rounded-lg"
                             maxLength="12"
                             pattern="[0-9]{10,12}"
                         />
@@ -281,7 +281,7 @@ const SignUpForm = ({ toggleForm}) => {
                             value={formData.password}
                             onChange={handleChange}
                             placeholder="Create Password"
-                            className="w-full p-3 rounded-lg bg-gray-100"
+                            className="w-full p-3 bg-gray-100 rounded-lg"
                         />
                     </div>
                     <div>
@@ -291,17 +291,17 @@ const SignUpForm = ({ toggleForm}) => {
                             value={formData.confirmPassword}
                             onChange={handleChange}
                             placeholder="Confirm Password"
-                            className="w-full p-3 rounded-lg bg-gray-100"
+                            className="w-full p-3 bg-gray-100 rounded-lg"
                         />
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-700"
+                        className="w-full py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-700"
                     >
                         Sign Up
                     </button>
                     <button 
-                        className="w-full md:hidden text-sm bg-gray-100 text-gray-700 py-3 rounded-lg hover:bg-gray-200 mt-2"
+                        className="w-full py-3 mt-2 text-sm text-gray-700 bg-gray-100 rounded-lg md:hidden hover:bg-gray-200"
                         onClick={() => toggleForm()}
                     >
                         Already have an account? Login.
@@ -338,3 +338,24 @@ const Authentication = ({ isOpen, setIsOpen }) => {
 }
 
 export default Authentication
+
+// import React, { useState } from 'react';
+// import LoginModal from './login';
+// import SignUpModal from './singup';
+
+// export default function AuthModal({ isOpen, onClose, initialView = 'login' }) {
+//   const [view, setView] = useState(initialView);
+
+//   const toggleView = () => {
+//     setView(view === 'login' ? 'signup' : 'login');
+//   };
+
+//   if (!isOpen) return null;
+
+//   return view === 'login' ? (
+//     <LoginModal isOpen={isOpen} onClose={onClose} onToggleForm={toggleView} />
+//   ) : (
+//     <SignUpModal isOpen={isOpen} onClose={onClose} onToggleForm={toggleView} />
+//   );
+// }
+
