@@ -5,6 +5,7 @@
 /* src/index.css or src/App.css */
 * {
     font-family: 'Outfit', sans-serif;
+    font-size: medium;
   }
   
 .inputImg,.selectImg {

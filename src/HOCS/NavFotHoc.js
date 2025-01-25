@@ -1,17 +1,18 @@
 import React from 'react';
-import Navbar from './Navbar'; // Assuming Navbar is a separate component
-import Footer from './Footer'; // Assuming Footer is a separate component
+import Navbar from '../components/navbar/Navbar'; // Assuming Navbar is a separate component
+import Footer from '../components/Footer/Footer'; // Assuming Footer is a separate component
+import SearchBox from '../components/SearchBox/SearchBox';
 
-const withNavbarAndFooter = (WrappedComponent) => {
-    return (props) => {
-        return (
-            <div>
-                <Navbar />
-                <WrappedComponent {...props} />
-                <Footer />
-            </div>
-        );
-    };
+
+const WithNavbarAndFooter = ({ WrappedComponent }) => {
+    return (
+        <div>
+            <Navbar />
+            
+            <WrappedComponent />
+            <Footer />
+        </div>
+    );
 };
 
-export default withNavbarAndFooter;
+export default WithNavbarAndFooter;

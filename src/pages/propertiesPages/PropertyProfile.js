@@ -4,6 +4,7 @@ import { cardsData, images } from '../../tempData/data';
 import MapImgae from '../../Assets/Images/image 3.png'
 import CardCarousel from '../../components/cardCarousel/CardCarousel';
 import Card from '../../components/card/Card';
+import SearchBox from '../../components/SearchBox/SearchBox';
 
 const PropertyProfile = () => {
     const { id } = useParams(); // Assuming 'id' is the parameter you want to extract
@@ -29,7 +30,9 @@ const PropertyProfile = () => {
     }
 
     return (
+        <>
         <div className='min-h-screen w-full py-5 md:py-10 md:px-5 lg:px-14 mt-10 text-[1.5rem] md:text-3xl'>
+            
             <div className='p-3 md:p-10 lg:p-20'>
                 <h1 className="text-xl md:text-2xl font-semibold w-full">{property?.title}</h1>
                 <div className="bg-white grid grid-cols-1 md:grid-cols-2 rounded-lg p-5 md:p-10 gap-5 md:gap-10 w-full ">
@@ -160,7 +163,7 @@ const PropertyProfile = () => {
                 </div>
                 </div>
             </div>
-        </div>
+        </div></>
     )
 }
 

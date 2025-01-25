@@ -9,7 +9,8 @@ const ROUTES_NAME = {
   VIEW_PROPERTY: '/property/:id',
   VIEW_PROJECT: '/project/:id',
   VIEW_BROKER: '/broker/:id',
-  ADMIN : '/admin'
+  ADMIN : '/admin',
+  POST_PROPERTY: '/post_a_property'
 
 };
 
