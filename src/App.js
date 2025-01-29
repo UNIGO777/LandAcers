@@ -8,14 +8,18 @@ import ContactPage from "./pages/contactPage/ContactPage";
 import AdminDashboard from './admin/Dashboard';
 import PropertyProfile from './pages/propertiesPages/PropertyProfile';
 import WithNavbarAndFooter from "./HOCS/NavFotHoc";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 import ROUTES_NAME from "./constants/routes";
 import './Assets/Global.css';
-
 function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <ToastContainer position="top-left" /> {/* Add ToastContainer for react-toastify */}
         <Routes>
           <Route path={ROUTES_NAME.HOME} element={<WithNavbarAndFooter WrappedComponent={HomePage} />} />
           <Route path={ROUTES_NAME.PROPERTIES} element={<WithNavbarAndFooter WrappedComponent={PropertiesPage} />} />

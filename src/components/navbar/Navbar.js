@@ -71,8 +71,8 @@ const Navbar = (isLoggedIn) => {
     >
       <div className="flex items-center justify-between px-4 py-3 mx-auto max-w-7xl md:py-4">
         {/* Logo */}
-        <div className={`text-2xl font-bold ${isHomePage ? (scrolled ? `text-${theme}-primary` : "text-white") : `text-${theme}-text`}`}>
-          <Link to={ROUTES_NAME.HOME}>LandsAcers</Link>
+        <div className={`text-3xl font-bold ${isHomePage ? (scrolled ? `text-${theme}-primary` : "text-white") : `text-${theme}-text`}`}>
+          <Link to={ROUTES_NAME.HOME} className="text-2xl">Land Acers</Link>
         </div>
 
         {/* Desktop Links */}
