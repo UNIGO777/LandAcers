@@ -24,46 +24,42 @@ const Layout = ({ children }) => {
   const location = useLocation()
 
   const navigationItems = [
-    { icon: FaHome, label: "Dashboard", path: "/" },
+    { icon: FaHome, label: "Home", path: "/admin/dashboard" },
     {
       icon: FaUsers,
-      label: "User Management",
+      label: "Users",
       path: "/users",
       subItems: [
-        { label: "All Users", path: "/users/all" },
-        { label: "Manage Users", path: "/users/manage" },
+        { label: "Manage Users", path: "/admin/users/manage" },
       ],
     },
     {
       icon: FaUserTie,
-      label: "Broker Management",
+      label: "Brokers",
       path: "/brokers",
       subItems: [
-        { label: "All Brokers", path: "/brokers/all" },
-        { label: "Manage Brokers", path: "/brokers/manage" },
+        { label: "Manage Brokers", path: "/admin/brokers/manage" },
       ],
     },
     {
       icon: FaBuilding,
-      label: "Property Management",
+      label: "Properties",
       path: "/properties",
       subItems: [
         { label: "All Properties", path: "/admin/properties/all" },
         { label: "Manage Property", path: "/admin/properties/manage/:id" },
-        { label: "Add Property", path: "/properties/add-property" },
-        { label: "Property Status", path: "/properties/property-status" },
+        { label: "Add Property", path: "/admin/property/add" },
       ],
     },
     {
       icon: FaQuestionCircle,
-      label: "Query Management",
+      label: "Queries",
       path: "/queries",
       subItems: [
-        { label: "All Queries", path: "/queries/all-queries" },
-        { label: "Manage Queries", path: "/queries/manage-queries" },
+        { label: "Manage Queries", path: "/admin/queries/manage" },
       ],
     },
-    { icon: FaMoneyBillWave, label: "Payment Management", path: "/payments" },
+    { icon: FaMoneyBillWave, label: "Payments", path: "/payments" },
     { icon: FaUserCog, label: "Settings", path: "/settings" },
   ]
 

@@ -1,6 +1,6 @@
-import  Layout  from "./components/Layout"
-import  MetricCards  from "./components/Cards.js"
-import RecentProperties  from "./components/RecentProperties.js"
+import  Layout  from "../Layout.js"
+import  MetricCards  from "../../Components/Cards.js"
+import RecentProperties  from "../../Components/RecentProperties.js"
 
 const Dashboard = () => {
   return (

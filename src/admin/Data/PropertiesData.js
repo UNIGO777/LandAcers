@@ -2,7 +2,7 @@ const FaHome = require('react-icons/fa').FaHome;
 const FaTree = require('react-icons/fa').FaTree;
 const FaMapMarkerAlt = require('react-icons/fa').FaMapMarkerAlt;
 
-const dummyProperties = [
+const PropertiesData = [
   {
     _id: '1',
     title: 'Luxurious Farmhouse with Mountain View',
@@ -152,4 +152,4 @@ const getTypeIcon = (type) => {
   }
 };
 
-export {getTypeIcon, dummyProperties}
+export {getTypeIcon, PropertiesData}

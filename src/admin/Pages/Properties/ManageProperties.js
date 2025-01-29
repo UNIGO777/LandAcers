@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { motion } from "framer-motion"
 import { FaSave, FaTrash, FaUpload, FaExclamationTriangle } from "react-icons/fa"
-import Layout from "../components/Layout"
-import { dummyProperties } from "../dummyData"
+import Layout from "../Layout"
+import { PropertiesData } from "../../Data/PropertiesData"
 
 const ManageProperty = () => {
   const { id } = useParams()
@@ -18,7 +18,7 @@ const ManageProperty = () => {
       setIsLoading(true)
       try {
         // In a real application, this would be an API call
-        const foundProperty = dummyProperties.find((p) => p._id === id)
+        const foundProperty = PropertiesData.find((p) => p._id === id)
         if (foundProperty) {
           setProperty(foundProperty)
         } else {

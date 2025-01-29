@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FaEye, FaCalendarAlt, FaDollarSign, FaTimes, FaFilter } from "react-icons/fa"
-import Layout from "../components/Layout"
-import { dummyProperties, getTypeIcon } from "../dummyData"
+import Layout from "../Layout"
+import { PropertiesData, getTypeIcon } from "../../Data/PropertiesData"
 
 const AllProperties = () => {
   const [selectedProperty, setSelectedProperty] = useState(null)
@@ -12,7 +12,7 @@ const AllProperties = () => {
   })
 
   const filteredProperties = useMemo(() => {
-    return dummyProperties.filter((property) => {
+    return PropertiesData.filter((property) => {
       return (
         (filters.type === "" || property.type === filters.type) &&
         (filters.status === "" || property.status === filters.status)
