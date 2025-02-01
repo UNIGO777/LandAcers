@@ -20,9 +20,13 @@ import ManageUsers from "./admin/Pages/Users/ManageUsers"
 import BrokerManagement from "./admin/Pages/Brokers/BrokerManagement";
 import QueriesManagement from "./admin/Pages/Queries/ManageQueries";
 import AddProperty from "./admin/Pages/Properties/AddProperties";
+import ManageSubscription from "./admin/Pages/ManageSubscription/ManageSubscription";
+
+
 
 import ROUTES_NAME from "./constants/routes";
 import './Assets/Global.css';
+
 function App() {
   return (
     <ThemeProvider>
@@ -42,6 +46,7 @@ function App() {
           <Route path={ROUTES_NAME.ADMIN_MANAGE_BROKERS} element={<BrokerManagement />} />
           <Route path={ROUTES_NAME.ADMIN_MANAGE_QUERIES} element={<QueriesManagement />} />
           <Route path={ROUTES_NAME.ADMIN_PROPERTY_ADD} element={<AddProperty />} />
+          <Route path={ROUTES_NAME.ADMIN_MANAGE_SUBSCRIPTION} element={<ManageSubscription/>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

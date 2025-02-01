@@ -17,7 +17,8 @@ const ROUTES_NAME = {
   ADMIN_MANAGE_BROKERS: '/admin/brokers/manage',
   ADMIN_MANAGE_USERS: '/admin/users/manage',
   ADMIN_MANAGE_QUERIES: '/admin/queries/manage',
-  ADMIN_PROPERTY_ADD: '/admin/property/add'
+  ADMIN_PROPERTY_ADD: '/admin/property/add',
+  ADMIN_MANAGE_SUBSCRIPTION: '/admin/subscription'
 };
 
 export default ROUTES_NAME;

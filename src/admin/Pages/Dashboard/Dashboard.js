@@ -1,6 +1,6 @@
 import  Layout  from "../Layout.js"
-import  MetricCards  from "../../Components/Cards.js"
-import RecentProperties  from "../../Components/RecentProperties.js"
+import Cards from "../../components/Cards.js"
+import RecentProperties  from "../../components/RecentProperties.js"
 
 const Dashboard = () => {
   return (
@@ -12,7 +12,7 @@ const Dashboard = () => {
           Welcome to LandsAcers dashboard. Here's an overview of your recent activity.
           </p>
         </div>
-        <MetricCards />
+        <Cards />
         <RecentProperties />
       </div>
     </Layout>

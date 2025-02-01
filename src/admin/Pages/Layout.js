@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import {
+  FaBox,
   FaHome,
   FaUsers,
   FaBuilding,
@@ -28,7 +29,7 @@ const Layout = ({ children }) => {
     {
       icon: FaUsers,
       label: "Users",
-      path: "/users",
+      
       subItems: [
         { label: "Manage Users", path: "/admin/users/manage" },
       ],
@@ -36,7 +37,6 @@ const Layout = ({ children }) => {
     {
       icon: FaUserTie,
       label: "Brokers",
-      path: "/brokers",
       subItems: [
         { label: "Manage Brokers", path: "/admin/brokers/manage" },
       ],
@@ -44,7 +44,7 @@ const Layout = ({ children }) => {
     {
       icon: FaBuilding,
       label: "Properties",
-      path: "/properties",
+      
       subItems: [
         { label: "All Properties", path: "/admin/properties/all" },
         { label: "Manage Property", path: "/admin/properties/manage/:id" },
@@ -54,13 +54,13 @@ const Layout = ({ children }) => {
     {
       icon: FaQuestionCircle,
       label: "Queries",
-      path: "/queries",
       subItems: [
         { label: "Manage Queries", path: "/admin/queries/manage" },
       ],
     },
-    { icon: FaMoneyBillWave, label: "Payments", path: "/payments" },
-    { icon: FaUserCog, label: "Settings", path: "/settings" },
+    { icon: FaBox, label: "Manage Subscription plans", path: "/admin/subscription" },
+    { icon: FaMoneyBillWave, label: "Payments", path: "/admin/payments" },
+    { icon: FaUserCog, label: "Settings", path: "/admin/settings" },
   ]
 
   const toggleExpanded = (label) => {
@@ -147,7 +147,7 @@ const Layout = ({ children }) => {
             } ${mobile ? "text-sm" : ""}`}
             onClick={() => (item.subItems ? toggleExpanded(item.label) : null)}
           >
-            <div className="flex items-center space-x-3">
+            {item.path ? <Link to={item.path} className="w-full"> <div className="flex items-center space-x-3">
               <motion.div
                 whileHover={{ rotate: 10 }}
                 className={`h-5 w-5 ${location.pathname === item.path ? "animate-pulse" : ""}`}
@@ -155,7 +155,15 @@ const Layout = ({ children }) => {
                 <item.icon />
               </motion.div>
               <span>{item.label}</span>
-            </div>
+            </div></Link> : <div className="flex items-center space-x-3">
+              <motion.div
+                whileHover={{ rotate: 10 }}
+                className={`h-5 w-5 ${location.pathname === item.path ? "animate-pulse" : ""}`}
+              >
+                <item.icon />
+              </motion.div>
+              <span>{item.label}</span>
+            </div>}
             {item.subItems && (
               <motion.div animate={{ rotate: expandedItems[item.label] ? 180 : 0 }} transition={{ duration: 0.3 }}>
                 {expandedItems[item.label] ? (
