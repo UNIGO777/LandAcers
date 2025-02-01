@@ -17,8 +17,9 @@ import {
   FaChevronUp,
   FaUser,
   FaSignOutAlt,
+  FaUserCog
 } from "react-icons/fa"
-import Notifications from "../Components/Notifications"
+import Notifications from "../components/Notifications"
 
 const Layout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)

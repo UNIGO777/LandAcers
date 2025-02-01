@@ -34,3 +34,5 @@ const PropertyCard = ({ title, price, location, thumbnail, type, status }) => {
   )
 }
 
+export default PropertyCard
+

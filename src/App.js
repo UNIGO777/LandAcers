@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
+
 import AdminLogin from './admin/Pages/AdminLogin/AdminLogin';
 import AdminDashboard from './admin/Pages/Dashboard/Dashboard';
 import AdminProperties from "./admin/Pages/Properties/components/AllProperties/AdminProperties";
@@ -24,6 +25,7 @@ import AddProperty from "./admin/Pages/Properties/AddProperties";
 
 import ROUTES_NAME from "./constants/routes";
 import './Assets/Global.css';
+import BrokerRequests from "./admin/Pages/Brokers/BrokerReqest";
 
 function App() {
   return (
