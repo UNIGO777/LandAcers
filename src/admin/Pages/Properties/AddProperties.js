@@ -1,14 +1,14 @@
-import React, { useState } from "react"
-import BasicDetails from "../Properties/components/PropertyFroms/BasicDetails"
-import LandDetails from "../Properties/components/PropertyFroms/LandDetils"
-import FarmhouseDetails from "../Properties/components/PropertyFroms/FarmHouseDetails"
-import PlotDetails from "../Properties/components/PropertyFroms/PlotDetails"
-import ImageUpload from "../Properties/components/PropertyFroms/ImageUpload"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Layout from "../Layout"
-import { useNavigate } from 'react-router-dom'; 
+import BasicDetails from "./components/PropertyFroms/BasicDetails"
+import LandDetails from "./components/PropertyFroms/LandDetils"
+import FarmhouseDetails from "./components/PropertyFroms/FarmHouseDetails"
+import PlotDetails from "./components/PropertyFroms/PlotDetails"
+import ImageUpload from "./components/PropertyFroms/ImageUpload"
 
 export default function AddProperty() {
-  const [step, setStep] = useState(1)
+  const [activeStep, setActiveStep] = useState(0)
   const [propertyData, setPropertyData] = useState({
     title: "",
     description: "",
@@ -21,7 +21,10 @@ export default function AddProperty() {
     },
     type: "",
     status: "available",
+    ownerType: "",
+    owner: "",
     views: 0,
+    queries: [],
     thumbnailImage: "",
     images: [],
     totalInquiries: 0,
@@ -30,8 +33,8 @@ export default function AddProperty() {
       expectedLaunchDate: "",
       developerName: "",
       priceRange: {
-        min: "",
-        max: "",
+        min: 0,
+        max: 0,
       },
       highlights: [],
     },
@@ -43,44 +46,95 @@ export default function AddProperty() {
       promotionalText: "",
       priority: 0,
     },
+    createdBy: "",
+    lastUpdatedBy: "",
   })
 
-  const navigate = useNavigate(); // Use usenavigate hook
+  const navigate = useNavigate()
 
-  const handleBasicDetailsSubmit = (basicData) => {
-    setPropertyData((prevData) => ({ ...prevData, ...basicData }))
-    setStep(2)
+  const steps = ["Basic Details", "Type-Specific Details", "Image Upload"]
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1)
   }
 
-  const handleTypeSpecificDetailsSubmit = (typeSpecificData) => {
-    setPropertyData((prevData) => ({ ...prevData, ...typeSpecificData }))
-    setStep(3)
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1)
   }
 
-  const handleImageUpload = (imageData) => {
-    setPropertyData((prevData) => ({ ...prevData, ...imageData }))
-    // Here you would typically send the data to your backend
-    console.log("Final Property Data:", propertyData)
-    // Redirect to property listing or dashboard
-    navigate.push("/properties")
+  const handleFormSubmit = (data) => {
+    setPropertyData((prevData) => ({ ...prevData, ...data }))
+    if (activeStep === steps.length - 1) {
+      console.log("Final Property Data:", propertyData)
+      navigate("/properties")
+    } else {
+      handleNext()
+    }
+  }
+
+  const getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return <BasicDetails onSubmit={handleFormSubmit} initialData={propertyData} />
+      case 1:
+        switch (propertyData.type) {
+          case "land":
+            return <LandDetails onSubmit={handleFormSubmit} initialData={propertyData} />
+          case "farmhouse":
+            return <FarmhouseDetails onSubmit={handleFormSubmit} initialData={propertyData} />
+          case "plot":
+            return <PlotDetails onSubmit={handleFormSubmit} initialData={propertyData} />
+          default:
+            return <div>Please select a property type in the Basic Details step.</div>
+        }
+      case 2:
+        return <ImageUpload onSubmit={handleFormSubmit} initialData={propertyData} />
+      default:
+        return <div>Unknown step</div>
+    }
   }
 
   return (
     <Layout>
-    <div className="container px-4 py-8 mx-auto">
-      <h1 className="mb-6 text-3xl font-bold">Add New Property</h1>
-      {step === 1 && <BasicDetails onSubmit={handleBasicDetailsSubmit} initialData={propertyData} />}
-      {step === 2 && propertyData.type === "land" && (
-        <LandDetails onSubmit={handleTypeSpecificDetailsSubmit} initialData={propertyData} />
-      )}
-      {step === 2 && propertyData.type === "farmhouse" && (
-        <FarmhouseDetails onSubmit={handleTypeSpecificDetailsSubmit} initialData={propertyData} />
-      )}
-      {step === 2 && propertyData.type === "plot" && (
-        <PlotDetails onSubmit={handleTypeSpecificDetailsSubmit} initialData={propertyData} />
-      )}
-      {step === 3 && <ImageUpload onSubmit={handleImageUpload} initialData={propertyData} />}
-    </div>
+      <div className="container px-4 py-8 mx-auto">
+        <h1 className="mb-6 text-3xl font-bold">Add New Property</h1>
+        <div className="mb-8">
+          <ol className="flex items-center justify-center">
+            {steps.map((label, index) => (
+              <li key={label} className={`flex items-center ${index < steps.length - 1 ? "w-full" : "flex-1"}`}>
+                <span
+                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                    index <= activeStep ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-600"
+                  }`}
+                >
+                  {index + 1}
+                </span>
+                <span className={`ml-2 text-sm ${index <= activeStep ? "text-blue-500 font-medium" : "text-gray-500"}`}>
+                  {label}
+                </span>
+                {index < steps.length - 1 && <div className="flex-1 h-px mx-4 bg-gray-300"></div>}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="mt-8">{getStepContent(activeStep)}</div>
+        <div className="flex justify-between mt-8">
+          <button
+            onClick={handleBack}
+            disabled={activeStep === 0}
+            className="px-6 py-2 text-gray-700 transition-colors border border-gray-300 rounded-md disabled:opacity-50 hover:bg-gray-100"
+          >
+            Back
+          </button>
+          <button
+            onClick={handleNext}
+            disabled={activeStep === steps.length - 1}
+            className="px-6 py-2 text-white transition-colors bg-blue-500 rounded-md disabled:opacity-50 hover:bg-blue-600"
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </Layout>
   )
 }

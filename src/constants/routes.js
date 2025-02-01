@@ -11,13 +11,16 @@ const ROUTES_NAME = {
   VIEW_PROJECT: '/project/:id',
   VIEW_BROKER: '/broker/:id',
   ADMIN_LOGIN : '/admin/login',
-  ADMIN_DASHBOARD : '/admin/dashboard',
+  ADMIN_HOME : '/admin/home',
   ADMIN_ALL_PROPERTIES: '/admin/properties/all',
-  ADMIN_MANAGE_PROPERTIES: '/admin/properties/manage/:id',
+  BROKER_ALL_PROPERTIES: '/brokers/properties/all',
+  USER_ALL_PROPERTIES: '/users/properties/all',
   ADMIN_MANAGE_BROKERS: '/admin/brokers/manage',
   ADMIN_MANAGE_USERS: '/admin/users/manage',
   ADMIN_MANAGE_QUERIES: '/admin/queries/manage',
-  ADMIN_PROPERTY_ADD: '/admin/property/add'
+  ADMIN_PROPERTY_ADD: '/admin/property/add',
+  ADMIN_BROKERS_REQUESTS: '/admin/brokers/requests',
+  ADMIN_ALL_PAYMENTS: '/admin/all/payments'
 };
 
 export default ROUTES_NAME;

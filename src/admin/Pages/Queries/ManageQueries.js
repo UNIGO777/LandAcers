@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import format from "date-fns/format"
 import isAfter from "date-fns/isAfter"
@@ -39,15 +39,15 @@ const QueriesManagement = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case "open":
-        return "#EAB308" // yellow-500
+        return "bg-yellow-500"
       case "in-progress":
-        return "#3B82F6" // blue-500
+        return "bg-blue-500"
       case "resolved":
-        return "#22C55E" // green-500
+        return "bg-green-500"
       case "closed":
-        return "#6B7280" // gray-500
+        return "bg-gray-500"
       default:
-        return "#D1D5DB" // gray-300
+        return "bg-gray-300"
     }
   }
 
@@ -57,217 +57,132 @@ const QueriesManagement = () => {
 
   return (
     <Layout>
-    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "2rem 1rem" }}>
-      <h1 style={{ fontSize: "1.875rem", fontWeight: "bold", marginBottom: "2rem" }}>Queries Management</h1>
+      <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <h1 className="mb-8 text-3xl font-bold">Queries Management</h1>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", marginBottom: "1.5rem" }}>
-        <input
-          type="text"
-          placeholder="Search by user, broker, or subject..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            flexGrow: 1,
-            padding: "0.5rem",
-            border: "1px solid #D1D5DB",
-            borderRadius: "0.375rem",
-            outline: "none",
-          }}
-        />
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-          style={{
-            padding: "0.5rem",
-            border: "1px solid #D1D5DB",
-            borderRadius: "0.375rem",
-            outline: "none",
-          }}
-        >
-          <option value="all">All Statuses</option>
-          <option value="open">Open</option>
-          <option value="in-progress">In Progress</option>
-          <option value="resolved">Resolved</option>
-          <option value="closed">Closed</option>
-        </select>
-        <input
-          type="date"
-          value={dateFilter ? format(dateFilter, "yyyy-MM-dd") : ""}
-          onChange={(e) => setDateFilter(e.target.value ? new Date(e.target.value) : null)}
-          style={{
-            padding: "0.5rem",
-            border: "1px solid #D1D5DB",
-            borderRadius: "0.375rem",
-            outline: "none",
-          }}
-        />
-      </div>
-
-      <div style={{ display: "grid", gap: "1rem", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))" }}>
-        {filteredQueries.map((query) => (
-          <motion.div
-            key={query._id.toString()}
-            layoutId={query._id.toString()}
-            onClick={() => setSelectedQuery(query)}
-            style={{
-              backgroundColor: "white",
-              padding: "1.5rem",
-              borderRadius: "0.5rem",
-              boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)",
-              cursor: "pointer",
-              transition: "box-shadow 0.3s ease-in-out",
-            }}
-            whileHover={{
-              boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-            }}
+        <div className="flex flex-wrap gap-4 mb-6">
+          <input
+            type="text"
+            placeholder="Search by user, broker, or subject..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="flex-grow px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                marginBottom: "1rem",
-              }}
-            >
-              <h2 style={{ fontSize: "1.25rem", fontWeight: "600" }}>{query.subject}</h2>
-              <span
-                style={{
-                  padding: "0.25rem 0.5rem",
-                  borderRadius: "9999px",
-                  fontSize: "0.75rem",
-                  fontWeight: "600",
-                  color: "white",
-                  backgroundColor: getStatusColor(query.status),
-                }}
-              >
-                {query.status}
-              </span>
-            </div>
-            <p style={{ color: "#4B5563", marginBottom: "1rem" }}>{query.description.substring(0, 100)}...</p>
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.875rem", color: "#6B7280" }}>
-              <span>User: {query.userName}</span>
-              <span>Broker: {query.brokerName}</span>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "0.875rem",
-                color: "#6B7280",
-                marginTop: "0.5rem",
-              }}
-            >
-              <span>Priority: {query.priority}</span>
-              <span>Created: {format(new Date(query.createdAt), "dd MMM yyyy")}</span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            <option value="all">All Statuses</option>
+            <option value="open">Open</option>
+            <option value="in-progress">In Progress</option>
+            <option value="resolved">Resolved</option>
+            <option value="closed">Closed</option>
+          </select>
+          <input
+            type="date"
+            value={dateFilter ? format(dateFilter, "yyyy-MM-dd") : ""}
+            onChange={(e) => setDateFilter(e.target.value ? new Date(e.target.value) : null)}
+            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
 
-      <AnimatePresence>
-        {selectedQuery && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{
-              position: "fixed",
-              inset: 0,
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "1rem",
-            }}
-            onClick={() => setSelectedQuery(null)}
-          >
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+          {filteredQueries.map((query) => (
             <motion.div
-              layoutId={selectedQuery._id.toString()}
-              style={{
-                backgroundColor: "white",
-                padding: "1.5rem",
-                borderRadius: "0.5rem",
-                boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
-                maxWidth: "42rem",
-                width: "100%",
-              }}
-              onClick={(e) => e.stopPropagation()}
+              key={query._id.toString()}
+              layoutId={query._id.toString()}
+              onClick={() => setSelectedQuery(query)}
+              className="p-6 transition-shadow duration-300 bg-white rounded-lg shadow-md cursor-pointer hover:shadow-lg"
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  marginBottom: "1rem",
-                }}
-              >
-                <h2 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{selectedQuery.subject}</h2>
+              <div className="flex items-start justify-between mb-4">
+                <h2 className="text-xl font-semibold">{query.subject}</h2>
                 <span
-                  style={{
-                    padding: "0.25rem 0.5rem",
-                    borderRadius: "9999px",
-                    fontSize: "0.875rem",
-                    fontWeight: "600",
-                    color: "white",
-                    backgroundColor: getStatusColor(selectedQuery.status),
-                  }}
+                  className={`px-2 py-1 rounded-full text-xs font-semibold text-white ${getStatusColor(query.status)}`}
                 >
-                  {selectedQuery.status}
+                  {query.status}
                 </span>
               </div>
-              <p style={{ color: "#4B5563", marginBottom: "1rem" }}>{selectedQuery.description}</p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
-                <div>
-                  <p style={{ fontWeight: "600" }}>User</p>
-                  <p>{selectedQuery.userName}</p>
-                </div>
-                <div>
-                  <p style={{ fontWeight: "600" }}>Broker</p>
-                  <p>{selectedQuery.brokerName}</p>
-                </div>
-                <div>
-                  <p style={{ fontWeight: "600" }}>Priority</p>
-                  <p style={{ textTransform: "capitalize" }}>{selectedQuery.priority}</p>
-                </div>
-                <div>
-                  <p style={{ fontWeight: "600" }}>Created At</p>
-                  <p>{format(new Date(selectedQuery.createdAt), "dd MMM yyyy HH:mm")}</p>
-                </div>
+              <p className="mb-4 text-gray-600">{query.description.substring(0, 150)}...</p>
+              <div className="flex justify-between text-sm text-gray-500">
+                <span>User: {query.userName}</span>
+                <span>Broker: {query.brokerName}</span>
               </div>
-              {selectedQuery.resolution && (
-                <div style={{ marginBottom: "1rem" }}>
-                  <p style={{ fontWeight: "600" }}>Resolution</p>
-                  <p>{selectedQuery.resolution}</p>
-                </div>
-              )}
-              {selectedQuery.resolvedAt && (
-                <div>
-                  <p style={{ fontWeight: "600" }}>Resolved At</p>
-                  <p>{format(new Date(selectedQuery.resolvedAt), "dd MMM yyyy HH:mm")}</p>
-                </div>
-              )}
-              <button
-                style={{
-                  marginTop: "1.5rem",
-                  backgroundColor: "#3B82F6",
-                  color: "white",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "0.375rem",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-                onClick={() => setSelectedQuery(null)}
-              >
-                Close
-              </button>
+              <div className="flex justify-between mt-2 text-sm text-gray-500">
+                <span>Priority: {query.priority}</span>
+                <span>Created: {format(new Date(query.createdAt), "dd MMM yyyy")}</span>
+              </div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          ))}
+        </div>
+
+        <AnimatePresence>
+          {selectedQuery && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 flex items-center justify-center p-4 bg-black bg-opacity-50"
+              onClick={() => setSelectedQuery(null)}
+            >
+              <motion.div
+                layoutId={selectedQuery._id.toString()}
+                className="w-full max-w-3xl p-6 bg-white rounded-lg shadow-xl"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <h2 className="text-2xl font-bold">{selectedQuery.subject}</h2>
+                  <span
+                    className={`px-2 py-1 rounded-full text-sm font-semibold text-white ${getStatusColor(selectedQuery.status)}`}
+                  >
+                    {selectedQuery.status}
+                  </span>
+                </div>
+                <p className="mb-4 text-gray-600">{selectedQuery.description}</p>
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <p className="font-semibold">User</p>
+                    <p>{selectedQuery.userName}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Broker</p>
+                    <p>{selectedQuery.brokerName}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Priority</p>
+                    <p className="capitalize">{selectedQuery.priority}</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold">Created At</p>
+                    <p>{format(new Date(selectedQuery.createdAt), "dd MMM yyyy HH:mm")}</p>
+                  </div>
+                </div>
+                {selectedQuery.resolution && (
+                  <div className="mb-4">
+                    <p className="font-semibold">Resolution</p>
+                    <p>{selectedQuery.resolution}</p>
+                  </div>
+                )}
+                {selectedQuery.resolvedAt && (
+                  <div>
+                    <p className="font-semibold">Resolved At</p>
+                    <p>{format(new Date(selectedQuery.resolvedAt), "dd MMM yyyy HH:mm")}</p>
+                  </div>
+                )}
+                <button
+                  className="px-4 py-2 mt-6 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                  onClick={() => setSelectedQuery(null)}
+                >
+                  Close
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </Layout>
   )
 }
 
-export default QueriesManagement;
+export default QueriesManagement
 

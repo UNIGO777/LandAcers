@@ -10,12 +10,15 @@ import WithNavbarAndFooter from "./HOCS/NavFotHoc";
 
 import AdminLogin from './admin/Pages/AdminLogin/AdminLogin';
 import AdminDashboard from './admin/Pages/Dashboard/Dashboard';
-import AllProperties from "./admin/Pages/Properties/AllProperties";
-import ManageProperty from "./admin/Pages/Properties/ManageProperties";
+import AdminProperties from "./admin/Pages/Properties/components/AllProperties/AdminProperties";
+import BrokerProperties from "./admin/Pages/Properties/components/AllProperties/BrokerProperties";
+import UserProperties from "./admin/Pages/Properties/components/AllProperties/UserProperties";
 import ManageUsers from "./admin/Pages/Users/ManageUsers"
 import BrokerManagement from "./admin/Pages/Brokers/BrokerManagement";
 import QueriesManagement from "./admin/Pages/Queries/ManageQueries";
 import AddProperty from "./admin/Pages/Properties/AddProperties";
+import BrokerRequests from "./admin/Pages/Brokers/BrokerReqest";
+import PaymentPage from "./admin/Pages/Payments/PaymentsPage";
 
 import ROUTES_NAME from "./constants/routes";
 import './Assets/Global.css';
@@ -31,13 +34,16 @@ function App() {
           <Route path={ROUTES_NAME.CONTACT} element={<WithNavbarAndFooter WrappedComponent={ContactPage} />} />
           <Route path={ROUTES_NAME.VIEW_PROPERTY} element={<WithNavbarAndFooter WrappedComponent={PropertyProfile} />} />
           <Route path={ROUTES_NAME.ADMIN_LOGIN} element={<AdminLogin />} />
-          <Route path={ROUTES_NAME.ADMIN_DASHBOARD} element={<AdminDashboard />} />
-          <Route path={ROUTES_NAME.ADMIN_ALL_PROPERTIES} element={<AllProperties />} />
-          <Route path={ROUTES_NAME.ADMIN_MANAGE_PROPERTIES} element={<ManageProperty />} />
+          <Route path={ROUTES_NAME.ADMIN_HOME} element={<AdminDashboard />} />
+          <Route path={ROUTES_NAME.ADMIN_ALL_PROPERTIES} element={<AdminProperties />} />
+          <Route path={ROUTES_NAME.BROKER_ALL_PROPERTIES} element={<BrokerProperties />} />
+          <Route path={ROUTES_NAME.USER_ALL_PROPERTIES} element={<UserProperties />} />
           <Route path={ROUTES_NAME.ADMIN_MANAGE_USERS} element={<ManageUsers />} />
           <Route path={ROUTES_NAME.ADMIN_MANAGE_BROKERS} element={<BrokerManagement />} />
+          <Route path={ROUTES_NAME.ADMIN_BROKERS_REQUESTS} element={<BrokerRequests />} />
           <Route path={ROUTES_NAME.ADMIN_MANAGE_QUERIES} element={<QueriesManagement />} />
           <Route path={ROUTES_NAME.ADMIN_PROPERTY_ADD} element={<AddProperty />} />
+          <Route path={ROUTES_NAME.ADMIN_ALL_PAYMENTS} element={<PaymentPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -1,102 +1,66 @@
-import React, { useState } from "react"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 
-const ImageUpload = ({ onSubmit, initialData }) => {
-  const [formData, setFormData] = useState(initialData)
+export default function ImageUpload({ onSubmit, initialData }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: initialData,
+  })
   const [previewImages, setPreviewImages] = useState([])
 
-  const handleThumbnailChange = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setFormData((prevData) => ({ ...prevData, thumbnailImage: reader.result }))
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
-  const handleImagesChange = (e) => {
+  const handleImageChange = (e) => {
     const files = Array.from(e.target.files)
-    const newPreviewImages = []
-
-    files.forEach((file) => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        newPreviewImages.push(reader.result)
-        if (newPreviewImages.length === files.length) {
-          setPreviewImages(newPreviewImages)
-          setFormData((prevData) => ({ ...prevData, images: [...prevData.images, ...newPreviewImages] }))
-        }
-      }
-      reader.readAsDataURL(file)
-    })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    onSubmit(formData)
+    setPreviewImages(files.map((file) => URL.createObjectURL(file)))
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <h2 className="mb-4 text-2xl font-bold">Image Upload</h2>
-
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label htmlFor="thumbnailImage" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="thumbnailImage" className="block mb-1 text-sm font-medium text-gray-700">
           Thumbnail Image
         </label>
         <input
-          type="file"
+          {...register("thumbnailImage", { required: "Thumbnail image is required" })}
           id="thumbnailImage"
-          name="thumbnailImage"
-          onChange={handleThumbnailChange}
+          type="file"
           accept="image/*"
-          className="block w-full mt-1"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={handleImageChange}
         />
-        {formData.thumbnailImage && (
-          <img
-            src={formData.thumbnailImage || "/placeholder.svg"}
-            alt="Thumbnail Preview"
-            className="object-cover w-32 h-32 mt-2"
-          />
-        )}
+        {errors.thumbnailImage && <p className="mt-1 text-sm text-red-500">{errors.thumbnailImage.message}</p>}
       </div>
 
       <div>
-        <label htmlFor="images" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="images" className="block mb-1 text-sm font-medium text-gray-700">
           Additional Images
         </label>
         <input
-          type="file"
+          {...register("images")}
           id="images"
-          name="images"
-          onChange={handleImagesChange}
+          type="file"
           accept="image/*"
           multiple
-          className="block w-full mt-1"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={handleImageChange}
         />
-        <div className="grid grid-cols-3 gap-4 mt-2">
-          {previewImages.map((image, index) => (
+      </div>
+
+      {previewImages.length > 0 && (
+        <div className="grid grid-cols-3 gap-4 mt-4">
+          {previewImages.map((src, index) => (
             <img
               key={index}
-              src={image || "/placeholder.svg"}
+              src={src || "/placeholder.svg"}
               alt={`Preview ${index + 1}`}
-              className="object-cover w-32 h-32"
+              className="object-cover w-full h-32 rounded-md"
             />
           ))}
         </div>
-      </div>
-
-      <div className="flex justify-end">
-        <button
-          type="submit"
-          className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          Submit
-        </button>
-      </div>
+      )}
     </form>
   )
 }
 
-export default ImageUpload;

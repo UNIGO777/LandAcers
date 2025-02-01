@@ -7,60 +7,60 @@ import {
   FaBuilding,
   FaQuestionCircle,
   FaMoneyBillWave,
-  FaUserCog,
   FaUserTie,
   FaBars,
   FaTimes,
   FaBell,
-  FaCog,
   FaSearch,
   FaChevronDown,
   FaChevronUp,
+  FaUser,
+  FaSignOutAlt,
 } from "react-icons/fa"
+import Notifications from "../Components/Notifications"
 
 const Layout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState({})
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
   const location = useLocation()
 
   const navigationItems = [
-    { icon: FaHome, label: "Home", path: "/admin/dashboard" },
+    { icon: FaHome, label: "Home", path: "/admin/home" },
     {
       icon: FaUsers,
       label: "Users",
-      path: "/users",
-      subItems: [
-        { label: "Manage Users", path: "/admin/users/manage" },
-      ],
+      path: "/admin/users",
+      subItems: [{ label: "Manage Users", path: "/admin/users/manage" }],
     },
     {
       icon: FaUserTie,
       label: "Brokers",
-      path: "/brokers",
+      path: "/admin/brokers",
       subItems: [
         { label: "Manage Brokers", path: "/admin/brokers/manage" },
+        { label: "Brokers Requests", path: "/admin/brokers/requests" },
       ],
     },
     {
       icon: FaBuilding,
       label: "Properties",
-      path: "/properties",
+      path: "/admin/properties",
       subItems: [
-        { label: "All Properties", path: "/admin/properties/all" },
-        { label: "Manage Property", path: "/admin/properties/manage/:id" },
+        { label: "Admin Properties", path: "/admin/properties/all" },
+        { label: "Broker Properties", path: "/admin/brokers/properties/all" },
+        { label: "User Properties", path: "/admin/users/properties/all" },
         { label: "Add Property", path: "/admin/property/add" },
       ],
     },
     {
       icon: FaQuestionCircle,
       label: "Queries",
-      path: "/queries",
-      subItems: [
-        { label: "Manage Queries", path: "/admin/queries/manage" },
-      ],
+      path: "/admin/queries",
+      subItems: [{ label: "Manage Queries", path: "/admin/queries/manage" }],
     },
-    { icon: FaMoneyBillWave, label: "Payments", path: "/payments" },
-    { icon: FaUserCog, label: "Settings", path: "/settings" },
+    { icon: FaMoneyBillWave, label: "Payments", path: "/admin/all/payments" },
   ]
 
   const toggleExpanded = (label) => {
@@ -70,53 +70,6 @@ const Layout = ({ children }) => {
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [])
-
-  const sidebarVariants = {
-    open: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      },
-    },
-    closed: {
-      x: "-100%",
-      opacity: 0,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30,
-      },
-    },
-  }
-
-  const menuItemVariants = {
-    hidden: {
-      opacity: 0,
-      x: -20,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-    },
-  }
-
-  const subMenuVariants = {
-    hidden: {
-      opacity: 0,
-      height: 0,
-    },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  }
 
   const renderNavigationItems = (items, mobile = false) => (
     <motion.div
@@ -133,19 +86,26 @@ const Layout = ({ children }) => {
       {items.map((item, index) => (
         <motion.div
           key={item.label}
-          variants={menuItemVariants}
-          initial="hidden"
-          animate="visible"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
           transition={{ delay: index * 0.1 }}
           className="mb-2"
         >
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <Link
+            to={item.path}
             className={`flex items-center justify-between rounded-lg px-4 py-2 text-gray-700 hover:bg-[#3B82F6] hover:text-white cursor-pointer transition-all duration-200 ${
               location.pathname === item.path ? "bg-[#3B82F6] text-white" : ""
             } ${mobile ? "text-sm" : ""}`}
-            onClick={() => (item.subItems ? toggleExpanded(item.label) : null)}
+            onClick={(e) => {
+              if (item.subItems) {
+                e.preventDefault()
+                toggleExpanded(item.label)
+              } else if (mobile) {
+                setIsMobileMenuOpen(false)
+              }
+            }}
           >
             <div className="flex items-center space-x-3">
               <motion.div
@@ -165,14 +125,18 @@ const Layout = ({ children }) => {
                 )}
               </motion.div>
             )}
-          </motion.div>
+          </Link>
           <AnimatePresence>
             {item.subItems && expandedItems[item.label] && (
               <motion.div
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
-                variants={subMenuVariants}
+                variants={{
+                  hidden: { opacity: 0, height: 0 },
+                  visible: { opacity: 1, height: "auto" },
+                }}
+                transition={{ duration: 0.3 }}
                 className={`ml-8 mt-1 space-y-1 ${mobile ? "text-sm" : ""}`}
               >
                 {item.subItems.map((subItem) => (
@@ -239,10 +203,10 @@ const Layout = ({ children }) => {
               onClick={() => setIsMobileMenuOpen(false)}
             />
             <motion.div
-              variants={sidebarVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="fixed inset-y-0 left-0 w-64 bg-white shadow-lg"
             >
               <div className="flex h-16 items-center justify-between border-b bg-[#3B82F6] px-6">
@@ -298,25 +262,50 @@ const Layout = ({ children }) => {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              onClick={() => setIsNotificationsOpen(true)}
               className="relative p-2 text-gray-400 transition-colors duration-200 rounded-full hover:bg-gray-100"
             >
               <FaBell className="w-5 h-5" />
               <span className="absolute w-2 h-2 bg-red-500 rounded-full top-1 right-1 animate-ping"></span>
             </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-2 text-gray-400 transition-colors duration-200 rounded-full hover:bg-gray-100"
-            >
-              <FaCog className="w-5 h-5" />
-            </motion.button>
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="h-8 w-8 rounded-full bg-[#3B82F6] text-white flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200"
-            >
-              <span className="text-sm font-medium">A</span>
-            </motion.div>
+            <div className="relative">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                className="h-8 w-8 rounded-full bg-[#3B82F6] text-white flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200"
+              >
+                <span className="text-sm font-medium">A</span>
+              </motion.button>
+              <AnimatePresence>
+                {isProfileMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 w-48 mt-2 bg-white rounded-md shadow-lg"
+                  >
+                    <Link
+                      to="/admin/profile"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <FaUser className="w-4 h-4 mr-2" />
+                      Edit Profile
+                    </Link>
+                    <Link
+                      to="/logout"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                    >
+                      <FaSignOutAlt className="w-4 h-4 mr-2" />
+                      Logout
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </motion.header>
 
@@ -340,6 +329,9 @@ const Layout = ({ children }) => {
           © 2023 LandsAcers. All rights reserved.
         </motion.footer>
       </div>
+
+      {/* Notifications Modal */}
+      <Notifications isOpen={isNotificationsOpen} onClose={() => setIsNotificationsOpen(false)} />
     </div>
   )
 }

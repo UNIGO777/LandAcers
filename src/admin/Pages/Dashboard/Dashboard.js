@@ -1,6 +1,6 @@
 import  Layout  from "../Layout.js"
 import  MetricCards  from "../../Components/Cards.js"
-import RecentProperties  from "../../Components/RecentProperties.js"
+import RecentPayments from "../../Components/RecentPayments.js"
 
 const Dashboard = () => {
   return (
@@ -13,7 +13,7 @@ const Dashboard = () => {
           </p>
         </div>
         <MetricCards />
-        <RecentProperties />
+        <RecentPayments />
       </div>
     </Layout>
   )
